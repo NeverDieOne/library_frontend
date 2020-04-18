@@ -30,7 +30,7 @@ def on_reload():
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
     )
-    template = env.get_template('template.html')
+    template = env.get_template('templates/template.html')
 
     chunked_books = chunked(books, books_per_page)
     for num, chunk_books in enumerate(chunked_books, start=1):
@@ -46,7 +46,7 @@ def on_reload():
 
 
 if __name__ == '__main__':
-    template_file = 'template.html'
+    template_file = 'templates/template.html'
 
     server = Server()
     server.watch(template_file, on_reload)
