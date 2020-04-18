@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="static/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Library</title>
+</head>
+<body>
+  <div class="container">
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item {% if current_page==1 %}disabled{% endif %}">
+          <a class="page-link" href="index{{ current_page - 1 }}.html">Назад</a>
+        </li>
+
+        {% for page in range(1, total_pages+1) %}
+          {% if current_page==page %}
+            <li class="page-item active">
+              <a class="page-link" href="index{{ page }}.html">{{ page }}</a>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="index{{ page }}.html">{{ page }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        <li class="page-item {% if current_page==total_pages %}disabled{% endif %}">
+          <a class="page-link" href="index{{ current_page + 1 }}.html">Вперед</a>
+        </li>
+      </ul>
+    </nav>
+
+    {% for book_chunk in books %}
+      <div class="row">
+        {% for book in book_chunk %}
+        <div class="col-6">
+          <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="{{ book.img_src }}" class="card-img" alt="{{ book.title }}">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ book.title }}</h5>
+                  <p class="card-text">{{ book.author }}</p>
+
+                  <!-- Парсил не все жанры, а только 1, поэтому тут не цикл, а просто один жанр -->
+                  <span class="badge badge-secondary">{{book.genre}}</span>
+
+                  <p class="card-text"><small class="text-muted"><a href="{{ book.book_path }}" target="_blank">Читать</a></small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <script src="static/js/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+  <script src="static/js/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+  <script src="static/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
