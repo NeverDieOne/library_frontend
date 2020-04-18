@@ -13,18 +13,14 @@ def get_books_from_json(filename):
     return books
 
 
-def fix_urls_in_books(books):
-    for book in books:
-        current_book_path = book['book_path']
-        book['book_path'] = quote(current_book_path)
-
-
 def on_reload():
     books = get_books_from_json('books.json')
     books_per_page = 15
     total_pages = math.ceil(len(books) / books_per_page)
 
-    fix_urls_in_books(books)
+    for book in books:
+        current_book_path = book['book_path']
+        book['book_path'] = quote(current_book_path)
 
     env = Environment(
         loader=FileSystemLoader('.'),
