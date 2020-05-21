@@ -37,13 +37,14 @@ def on_reload():
             books=chunked(chunk_books, 2)
         )
 
-        with open(f'index{num}.html', 'w', encoding="utf8") as file:
+        with open(f'dist/index{num}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
 
 
 if __name__ == '__main__':
     template_file = 'template.html'
 
+    on_reload()
     server = Server()
     server.watch(template_file, on_reload)
     server.serve(root='.')
