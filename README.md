@@ -13,7 +13,7 @@
 
 ## Превью сайта
 
-Посмотреть сайт можно [здесь](https://neverdieone.github.io/library_frontend/index1.html)
+Посмотреть сайт можно [здесь](https://neverdieone.github.io/library_frontend/pages/1.html)
 
 
 ## Цель проекта

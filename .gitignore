@@ -141,7 +141,3 @@ dmypy.json
 cython_debug/
 
 .idea/*
-
-pages/books
-books.json
-pages/images

@@ -4,6 +4,8 @@ from livereload import Server
 from more_itertools import chunked
 import math
 from urllib.parse import quote
+import glob
+import os
 
 
 def get_books_from_json(filename):
@@ -13,7 +15,19 @@ def get_books_from_json(filename):
     return books
 
 
+def clean_pages_files(exists_pages_nums, pages_dir='pages'):
+    all_pages = glob.glob(f"{pages_dir}/*.html")
+
+    for page in all_pages:
+        page_number = page.split('/')[-1].split('.')[0]
+
+        if int(page_number) not in exists_pages_nums:
+            os.remove(page)
+
+
 def on_reload():
+    exists_pages = set()
+
     books = get_books_from_json('books.json')
     books_per_page = 15
     total_pages = math.ceil(len(books) / books_per_page)
@@ -39,6 +53,9 @@ def on_reload():
 
         with open(f'pages/{num}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
+            exists_pages = exists_pages | {num}
+
+    clean_pages_files(exists_pages)
 
 
 if __name__ == '__main__':
