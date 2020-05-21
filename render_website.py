@@ -37,7 +37,7 @@ def on_reload():
             books=chunked(chunk_books, 2)
         )
 
-        with open(f'dist/index{num}.html', 'w', encoding="utf8") as file:
+        with open(f'pages/{num}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
 
 
